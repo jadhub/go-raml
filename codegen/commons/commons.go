@@ -34,6 +34,8 @@ const (
 func doNormalizeURI(URI string) string {
 	s := strings.Replace(URI, "/", " ", -1)
 	s = strings.Replace(s, "{", "", -1)
+	// Bugfix: Replace dashes
+	s = strings.Replace(s, "-", "", -1)
 	return strings.Replace(s, "}", "", -1)
 }
 
@@ -47,6 +49,16 @@ func NormalizeURITitle(URI string) string {
 	s := strings.Title(doNormalizeURI(URI))
 	return strings.Replace(s, " ", "", -1)
 
+}
+
+// normalizeName replaces non-allowed characters, Bugfix
+func NormalizeName(s string) string {
+	reg, err := regexp.Compile("[^A-Za-z0-9_]+")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return reg.ReplaceAllString(s, "")
 }
 
 // ParseDescription create string slice from an RAML description.

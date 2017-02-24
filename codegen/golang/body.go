@@ -38,6 +38,7 @@ func generateStructsFromResourceBody(resourcePath, dir, packageName string, r *r
 	}
 
 	normalizedPath := commons.NormalizeURITitle(resourcePath + r.URI)
+	normalizedPath = commons.NormalizeName(normalizedPath)
 
 	for _, v := range methods {
 		if err := buildBodyFromMethod(normalizedPath, v.Name, dir, packageName, v.Method); err != nil {

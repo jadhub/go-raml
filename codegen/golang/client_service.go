@@ -4,6 +4,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/Jumpscale/go-raml/codegen/commons"
 	"github.com/Jumpscale/go-raml/codegen/resource"
 )
 
@@ -16,12 +17,16 @@ type ClientService struct {
 
 // Name returns it's struct name
 func (cs ClientService) Name() string {
-	return strings.Title(cs.rootEndpoint[1:]) + "Service"
+	name := commons.NormalizeName(strings.Title(cs.rootEndpoint[1:]) + "Service")
+
+	return name
 }
 
 // EndpointName returns root endpoint name
 func (cs ClientService) EndpointName() string {
-	return strings.Title(cs.rootEndpoint[1:])
+	result := commons.NormalizeName(strings.Title(cs.rootEndpoint[1:]))
+
+	return result
 }
 
 // FilenameNoExt return filename without extension
