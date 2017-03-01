@@ -59,6 +59,9 @@ func NewClient(apiDef *raml.APIDefinition, packageName, rootImportPath string) (
 	if strings.Index(client.BaseURI, "{version}") > 0 {
 		client.BaseURI = strings.Replace(client.BaseURI, "{version}", apiDef.Version, -1)
 	}
+
+	client.BaseURI = strings.TrimSuffix(client.BaseURI, "/")
+
 	return client, nil
 }
 
