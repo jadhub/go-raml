@@ -15,11 +15,6 @@ type {{.Name}} service
 
 
 {{ range $k, $v := .Methods }}
-
-{{if ne $v.RespBody "" }}
-type {{$v.RespBody}} map[string]interface{}
-{{end}}
-
 {{ range $kf, $vf := $v.FuncComments }}
 // {{$vf}} {{end}}
 func (s *{{$serviceiName}}) {{$v.MethodName}}({{$v.Params}}){{$v.ReturnTypes}} {
